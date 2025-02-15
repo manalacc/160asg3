@@ -430,29 +430,33 @@ function drawMap() {
 let g_screenTexture = -2;
 // destroy or place block next to player (g_camera.eye)
 function click() {
-    x_eye = Math.round((parseInt(g_camera.eye.elements[0])/24)*32);
-    y_eye = Math.round((parseInt(g_camera.eye.elements[1])/24)*32);
-    z_eye = 32-Math.abs(Math.round((parseInt(g_camera.eye.elements[2])/24)*32));
-
     x_at = Math.round((parseInt(g_camera.at.elements[0])/24)*32);
     y_at = Math.round((parseInt(g_camera.at.elements[1])/24)*32);
-    z_at = Math.round((parseInt(g_camera.at.elements[2])/24)*32);
+    z_at = 32-Math.abs(Math.round((parseInt(g_camera.at.elements[2])/24)*32));
 
-    //console.log('EYE:', x_eye, y_eye, 32-Math.abs(z_eye));
-    //console.log('AT:', x_at, y_at, z_at-32);
+    //x_at = Math.round((parseInt(g_camera.at.elements[0])/24)*32);
+    //y_at = Math.round((parseInt(g_camera.at.elements[1])/24)*32);
+    //z_at = Math.round((parseInt(g_camera.at.elements[2])/24)*32);
 
-    if (x_eye <= 32 || y_eye <= 32 || z_eye <= 32) {
-        //console.log(g_map[x_eye][Math.abs(z_eye)])
-        if (g_map[x_eye][Math.abs(z_eye)] == 0) {
-            g_map[x_eye][Math.abs(z_eye)] = 1
-        } else if ((x_eye >= 3 && x_eye <= 5) && (y_eye >= 5 && y_eye < 13) && (x_eye >= 3 && x_eye <= 5)) {
+    //console.log('EYE:', x_eye, y_eye, 32-Mathac.abs(z_eye));
+    console.log('AT:', x_at, y_at, z_at);
+
+    if (x_at <= 32 || y_at <= 32 || z_at <= 32) {
+        //console.log(g_map[x_eye][Math.abs(z_at)])
+        if (g_map[x_at][Math.abs(z_at)] == 0) {
+            if (y_at > 0) {
+                g_map[x_at][Math.abs(z_at)] = y_at
+            } else {
+                g_map[x_at][Math.abs(z_at)] = 1
+            }
+        } else if ((x_at >= 3 && x_at <= 5) && (y_at >= 5 && y_at < 13) && (x_at >= 3 && x_at <= 5)) {
             g_screenTexture += 1;
             console.log(g_screenTexture)
             if (g_screenTexture > 5) {
                 g_screenTexture = -2;
             }
         } else {
-            g_map[x_eye][Math.abs(z_eye)] = 0
+            g_map[x_at][Math.abs(z_at)] = 0
         } 
         
     }
